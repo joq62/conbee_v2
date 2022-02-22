@@ -1,0 +1,304 @@
+https://github.com/deconz-community/deconz-docker/blob/main/README.md
+
+
+pi@c202:~ $ sudo gpasswd -a $USER dialout
+Adding user pi to group dialout
+pi@c202:~ $ get -O - http://phoscon.de/apt/deconz.pub.key | \
+           sudo apt-key add -
+bash: get: command not found
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+gpg: no valid OpenPGP data found.
+pi@c202:~ $ sudo get -O - http://phoscon.de/apt/deconz.pub.key | sudo apt-key add -
+sudo: get: command not found
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+gpg: no valid OpenPGP data found.
+pi@c202:~ $ sudo wget -O - http://phoscon.de/apt/deconz.pub.key | sudo apt-key add -
+--2022-02-22 19:38:04--  http://phoscon.de/apt/deconz.pub.key
+Resolving phoscon.de (phoscon.de)... 144.76.96.194
+Connecting to phoscon.de (phoscon.de)|144.76.96.194|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1692 (1.7K) [application/octet-stream]
+Saving to: ‘STDOUT’
+
+-                                                                        100%[===============================================================================================================================================================================>]   1.65K  --.-KB/s    in 0.002s  
+
+2022-02-22 19:38:05 (662 KB/s) - written to stdout [1692/1692]
+
+Warning: apt-key is deprecated. Manage keyring files in trusted.gpg.d instead (see apt-key(8)).
+OK
+pi@c202:~ $ sudo sh -c "echo 'deb [arch=amd64] http://phoscon.de/apt/deconz \
+            $(lsb_release -cs) main' > \
+            /etc/apt/sources.list.d/deconz.list"
+pi@c202:~ $  sudo apt update
+Hit:1 http://deb.debian.org/debian bullseye InRelease
+Hit:2 http://deb.debian.org/debian bullseye-updates InRelease                      
+Hit:3 http://security.debian.org/debian-security bullseye-security InRelease                                         
+Hit:4 http://archive.raspberrypi.org/debian bullseye InRelease                                                       
+Get:5 http://phoscon.de/apt/deconz bullseye InRelease [2,873 B]                                       
+Get:6 http://phoscon.de/apt/deconz bullseye/main amd64 Packages [732 B]
+Fetched 3,605 B in 2s (2,284 B/s) 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+pi@c202:~ $ sudo apt list --upgradable
+Listing... Done
+libjavascriptcoregtk-4.0-18/stable-security 2.34.6-1~deb11u1 arm64 [upgradable from: 2.34.4-1~deb11u1]
+libwebkit2gtk-4.0-37/stable-security 2.34.6-1~deb11u1 arm64 [upgradable from: 2.34.4-1~deb11u1]
+rpi-eeprom/stable 13.9-1 arm64 [upgradable from: 13.8-1]
+pi@c202:~ $ sudo apt update
+Hit:1 http://security.debian.org/debian-security bullseye-security InRelease
+Hit:2 http://deb.debian.org/debian bullseye InRelease                                                                          
+Hit:3 http://deb.debian.org/debian bullseye-updates InRelease                                                                  
+Hit:4 http://archive.raspberrypi.org/debian bullseye InRelease                        
+Hit:5 http://phoscon.de/apt/deconz bullseye InRelease                                 
+Reading package lists... Done                
+Building dependency tree... Done
+Reading state information... Done
+3 packages can be upgraded. Run 'apt list --upgradable' to see them.
+pi@c202:~ $ sudo apt upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages will be upgraded:
+  libjavascriptcoregtk-4.0-18 libwebkit2gtk-4.0-37 rpi-eeprom
+3 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.
+Need to get 20.8 MB of archives.
+After this operation, 523 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://security.debian.org/debian-security bullseye-security/main arm64 libwebkit2gtk-4.0-37 arm64 2.34.6-1~deb11u1 [13.3 MB]
+Get:2 http://archive.raspberrypi.org/debian bullseye/main arm64 rpi-eeprom arm64 13.9-1 [1,593 kB]
+Get:3 http://security.debian.org/debian-security bullseye-security/main arm64 libjavascriptcoregtk-4.0-18 arm64 2.34.6-1~deb11u1 [5,853 kB]
+Fetched 20.8 MB in 6s (3,530 kB/s)                       
+Reading changelogs... Done
+(Reading database ... 103784 files and directories currently installed.)
+Preparing to unpack .../libwebkit2gtk-4.0-37_2.34.6-1~deb11u1_arm64.deb ...
+Unpacking libwebkit2gtk-4.0-37:arm64 (2.34.6-1~deb11u1) over (2.34.4-1~deb11u1) ...
+Preparing to unpack .../libjavascriptcoregtk-4.0-18_2.34.6-1~deb11u1_arm64.deb ...
+Unpacking libjavascriptcoregtk-4.0-18:arm64 (2.34.6-1~deb11u1) over (2.34.4-1~deb11u1) ...
+Preparing to unpack .../rpi-eeprom_13.9-1_arm64.deb ...
+Unpacking rpi-eeprom (13.9-1) over (13.8-1) ...
+Setting up libjavascriptcoregtk-4.0-18:arm64 (2.34.6-1~deb11u1) ...
+Setting up libwebkit2gtk-4.0-37:arm64 (2.34.6-1~deb11u1) ...
+Setting up rpi-eeprom (13.9-1) ...
+Processing triggers for man-db (2.9.4-2) ...
+Processing triggers for libc-bin (2.31-13+rpt2+rpi1+deb11u2) ...
+Scanning processes...                                                                                                                                                                                                                                                                            
+Scanning processor microcode...                                                                                                                                                                                                                                                                  
+Scanning linux images...                                                                                                                                                                                                                                                                         
+
+Running kernel seems to be up-to-date.
+
+Failed to check for processor microcode upgrades.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+pi@c202:~ $ sudo apt install deconz
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+E: Unable to locate package deconz
+pi@c202:~ $ gnome-session-properties
+bash: gnome-session-properties: command not found
+pi@c202:~ $ deCONZ --http-port=80 --auto-connect=1
+bash: deCONZ: command not found
+pi@c202:~ $ sudo usermod -a -G dialout $USER
+pi@c202:~ $ sudo apt install wiringpi
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Package wiringpi:armhf is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Package 'wiringpi:armhf' has no installation candidate
+pi@c202:~ $ sudo docker pull deconzcommunity/deconz:latest
+latest: Pulling from deconzcommunity/deconz
+4c7c9f6f1115: Pull complete 
+a06c93b06e08: Pull complete 
+b3649361920a: Pull complete 
+4e86ed69b10a: Pull complete 
+6136b09e950b: Pull complete 
+e7fa9327565e: Pull complete 
+d456d492d313: Pull complete 
+065ae2c1ce33: Pull complete 
+Digest: sha256:a3b5bcbdf85a65c92d1600979c51fd037ac4e0210eac7e99a0edd8dbaf8580d0
+Status: Downloaded newer image for deconzcommunity/deconz:latest
+docker.io/deconzcommunity/deconz:latest
+pi@c202:~ $ docker run -d \
+    --name=deconz \
+    --restart=always \
+    -p 80:80 \
+    -p 443:443 \
+    -v /etc/localtime:/etc/localtime:ro \
+    -v /opt/deconz:/opt/deCONZ \
+    --device=/dev/ttyAMA0 \
+    deconzcommunity/deconz
+docker: unknown server OS: .
+See 'docker run --help'.
+pi@c202:~ $ sudo docker run -d --name=deconz --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyAMA0  deconzcommunity/deconz
+docker: Error response from daemon: Conflict. The container name "/deconz" is already in use by container "68ff376cd34fd6188ae5e2dceb37c52de63e70b09cbff6e2a91279f2c0077073". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+pi@c202:~ $ sudo docker run -d --name=deconz3 --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyAMA0  deconzcommunity/deconz
+db0f4775faccea5630e6082ca9bf3986eb3a058862a91c82c3be632dc24bb2e0
+pi@c202:~ $  https://hostname:6080/vnc.html
+bash: https://hostname:6080/vnc.html: No such file or directory
+pi@c202:~ $ https://192.168.0.202:6080/vnc.html
+bash: https://192.168.0.202:6080/vnc.html: No such file or directory
+pi@c202:~ $ https://192.168.0.202:5900/vnc.html
+bash: https://192.168.0.202:5900/vnc.html: No such file or directory
+pi@c202:~ $ docker container ls
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+pi@c202:~ $ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND       CREATED         STATUS                   PORTS                                                          NAMES
+db0f4775facc   deconzcommunity/deconz   "/start.sh"   9 minutes ago   Up 9 minutes (healthy)   0.0.0.0:80->80/tcp, 5900/tcp, 0.0.0.0:443->443/tcp, 6080/tcp   deconz3
+pi@c202:~ $ sudo docker run -d --name=deconz4 --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+fd9f4b4bc5a2060c7f2db7cacc619fd4a657fa972a5eaa9d14b1abc83a306e2b
+docker: Error response from daemon: driver failed programming external connectivity on endpoint deconz4 (2fd1204d07b5bd805e180c515b0aa494f3705c793e1c2b6a047cc00bf1c7670a): Bind for 0.0.0.0:443 failed: port is already allocated.
+pi@c202:~ $ sudo docker run -d --name=deconz4 --restart=always -p 5700:5700 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+docker: Error response from daemon: Conflict. The container name "/deconz4" is already in use by container "fd9f4b4bc5a2060c7f2db7cacc619fd4a657fa972a5eaa9d14b1abc83a306e2b". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+pi@c202:~ $ sudo docker run -d --name=deconz5 --restart=always -p 5700:5700 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+2900a8950aba043583dae3fcb996b9ef1a48a3d65c786ceca099cc26c5344336
+docker: Error response from daemon: driver failed programming external connectivity on endpoint deconz5 (8e257e8f4d65ede72bfd601b496243a67a88700729c26e2e8f9879ffff8f726a): Bind for 0.0.0.0:443 failed: port is already allocated.
+pi@c202:~ $ sudo docker run -d --name=deconz5 --restart=always -p 5700:5700  -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+docker: Error response from daemon: Conflict. The container name "/deconz5" is already in use by container "2900a8950aba043583dae3fcb996b9ef1a48a3d65c786ceca099cc26c5344336". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+pi@c202:~ $ sudo docker run -d --name=deconz6 --restart=always -p 5700:5700  -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+06990a04c5f7213ca4f7e11ae4a1a88854e8dd94031f897bee6cf3442e9be472
+pi@c202:~ $ sudo docker ls
+docker: 'ls' is not a docker command.
+See 'docker --help'
+pi@c202:~ $ docker container ls
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/json": dial unix /var/run/docker.sock: connect: permission denied
+pi@c202:~ $ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND       CREATED          STATUS                    PORTS                                                          NAMES
+06990a04c5f7   deconzcommunity/deconz   "/start.sh"   22 seconds ago   Up 20 seconds (healthy)   80/tcp, 443/tcp, 5900/tcp, 6080/tcp, 0.0.0.0:5700->5700/tcp    deconz6
+db0f4775facc   deconzcommunity/deconz   "/start.sh"   27 minutes ago   Up 27 minutes (healthy)   0.0.0.0:80->80/tcp, 5900/tcp, 0.0.0.0:443->443/tcp, 6080/tcp   deconz3
+pi@c202:~ $ sudo docker stop deconz3
+deconz3
+pi@c202:~ $ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND       CREATED         STATUS                   PORTS                                                         NAMES
+06990a04c5f7   deconzcommunity/deconz   "/start.sh"   2 minutes ago   Up 2 minutes (healthy)   80/tcp, 443/tcp, 5900/tcp, 6080/tcp, 0.0.0.0:5700->5700/tcp   deconz6
+pi@c202:~ $ sudo docker stop deconz6
+deconz6
+pi@c202:~ $ sudo docker run -d --name=deconz --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+docker: Error response from daemon: Conflict. The container name "/deconz" is already in use by container "68ff376cd34fd6188ae5e2dceb37c52de63e70b09cbff6e2a91279f2c0077073". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+pi@c202:~ $ sudo docker stop deconz
+deconz
+pi@c202:~ $ sudo docker run -d --name=deconz --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+docker: Error response from daemon: Conflict. The container name "/deconz" is already in use by container "68ff376cd34fd6188ae5e2dceb37c52de63e70b09cbff6e2a91279f2c0077073". You have to remove (or rename) that container to be able to reuse that name.
+See 'docker run --help'.
+pi@c202:~ $ sudo docker remove deconz
+docker: 'remove' is not a docker command.
+See 'docker --help'
+pi@c202:~ $ docker --help
+
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Options:
+      --config string      Location of client config files (default "/home/pi/.docker")
+  -c, --context string     Name of the context to use to connect to the daemon (overrides DOCKER_HOST env var and default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level ("debug"|"info"|"warn"|"error"|"fatal") (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default "/home/pi/.docker/ca.pem")
+      --tlscert string     Path to TLS certificate file (default "/home/pi/.docker/cert.pem")
+      --tlskey string      Path to TLS key file (default "/home/pi/.docker/key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+pi@c202:~ $ docker rm deconz
+Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Delete "http://%2Fvar%2Frun%2Fdocker.sock/v1.24/containers/deconz": dial unix /var/run/docker.sock: connect: permission denied
+pi@c202:~ $ sudo docker rm deconz
+deconz
+pi@c202:~ $ sudo docker rm deconz1
+deconz1
+pi@c202:~ $ sudo docker rm deconz2
+deconz2
+pi@c202:~ $ sudo docker rm deconz3
+deconz3
+pi@c202:~ $ sudo docker rm deconz4
+deconz4
+pi@c202:~ $ sudo docker rm deconz5
+deconz5
+pi@c202:~ $ sudo docker rm deconz6
+deconz6
+pi@c202:~ $ sudo docker run -d --name=deconz --restart=always -p 80:80 -p 443:443 -v /etc/localtime:/etc/localtime:ro -v /opt/deconz:/opt/deCONZ --device=/dev/ttyACM0  deconzcommunity/deconz
+9405aaf0aa435adaecbc3e5f86c08ad4478e0cc87a1ecee1e5f1d38ae6d88291
+pi@c202:~ $ sudo docker container ls
+CONTAINER ID   IMAGE                    COMMAND       CREATED          STATUS                    PORTS                                                          NAMES
+9405aaf0aa43   deconzcommunity/deconz   "/start.sh"   18 seconds ago   Up 17 seconds (healthy)   0.0.0.0:80->80/tcp, 5900/tcp, 0.0.0.0:443->443/tcp, 6080/tcp   deconz
+pi@c202:~ $ 
+
